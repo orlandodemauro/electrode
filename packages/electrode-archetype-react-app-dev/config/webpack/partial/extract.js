@@ -32,6 +32,7 @@ var AppMode = archetype.AppMode;
 
 var cssNextExists = (glob.sync(Path.resolve(AppMode.src.client, "**", "*.css")).length > 0);
 var stylusExists = (glob.sync(Path.resolve(AppMode.src.client, "**", "*.styl")).length > 0);
+var scopedName = require("electrode-archetype-react-app/support").cssModuleHook;
 
 // By default, this archetype assumes you are using CSS-Modules + CSS-Next
 var cssModuleSupport = true;
@@ -47,8 +48,8 @@ if (stylusExists && !cssNextExists) {
 
 module.exports = function () {
   return function (config) {
-    var stylusQuery = cssLoader + "?-autoprefixer!" + stylusLoader;
-    var cssQuery = cssLoader + "?modules&-autoprefixer!" + postcssLoader;
+    var stylusQuery = `${cssLoader}?-autoprefixer&localIdentName=${scopedName}!${stylusLoader}`;
+    var cssQuery = `${cssLoader}?modules&-autoprefixer&localIdentName=${scopedName}!${postcssLoader}`;
 
     // By default, this archetype assumes you are using CSS-Modules + CSS-Next
     var loaders = [{

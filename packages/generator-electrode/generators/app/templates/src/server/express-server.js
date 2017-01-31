@@ -1,5 +1,6 @@
 "use strict";
 
+require("css-modules-require-hook/preset");
 const Promise = require("bluebird");
 const express = require("express");
 const app = express();

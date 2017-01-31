@@ -9,13 +9,7 @@ const AppMode = archetype.AppMode;
 const Path = require("path");
 
 const support = {
-  cssModuleHook: function (options) {
-    options = options || {};
-    options.generateScopedName = options.generateScopedName || "[hash:base64]";
-    options.rootDir = options.rootDir || Path.resolve(process.cwd(), "client");
-
-    require("css-modules-require-hook")(options);
-  },
+  cssModuleHook: require(Path.resolve(process.cwd() + "/server/cmrh.conf.js")).generateScopedName || "[hash:base64]",
   require: require("../require"),
   babelRegister,
   isomorphicExtendRequire: () => {
